@@ -10,8 +10,18 @@ spring:
     druid:
       driver-class-name: ${sky.datasource.driver-class-name}
       url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: ${sky.datasource.username}
-      password: ${sky.datasource.password}
+      username: root
+      password: z159159
+      initial-size: 5  # 初始化连接数
+      max-active: 20   # 最大连接数
+      min-idle: 5      # 最小空闲连接数
+      max-wait: 60000  # 获取连接的最大等待时间（毫秒）
+      time-between-eviction-runs-millis: 60000  # 检测空闲连接的间隔时间（毫秒）
+      min-evictable-idle-time-millis: 300000  # 连接空闲时间阈值（毫秒）
+      validation-query: SELECT 1  # 验证连接的SQL语句
+      test-while-idle: true       # 在空闲时验证连接
+      test-on-borrow: false       # 借出连接时不验证
+      test-on-return: false       # 返回连接时不验证
 
 mybatis:
   #mapper配置文件
@@ -34,6 +44,6 @@ sky:
     # 设置jwt签名加密时使用的秘钥
     admin-secret-key: itcast
     # 设置jwt过期时间
-    admin-ttl: 7200000
+    admin-ttl: 2592000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
